@@ -1,0 +1,7 @@
+a::before {
+    content:'';
+    display:block;
+}
+div{
+    text-align: center;
+}
