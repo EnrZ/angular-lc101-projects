@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fav-photos.component.css']
 })
 export class FavPhotosComponent implements OnInit {
-  photosTitle = 'Photo/Image Section Title Here';
-  image1 = 'https://www.launchcode.org/assets/icons/target-00c7a0bc7776901e3c5cdc4c36c465f19e41a249bc7267a595f0bfa14ab944b7.png';
-  image2 = '';
-  image3 = '';
+  photosTitle = 'Movie Images';
+  image1 = 'https://image.tmdb.org/t/p/original/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg';
+  image2 = 'https://www.thecinemashow.it/wp-content/uploads/2018/11/7gZZ6Qk2TZf4bEXHYbBEFlH8emJ.jpg';
+  image3 = 'https://i2.wp.com/teaser-trailer.com/wp-content/uploads/Oceans-8-New-Poster-from-Hong-Kong.jpg?ssl=1';
 
   constructor() { }
 
