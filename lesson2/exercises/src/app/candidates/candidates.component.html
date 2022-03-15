@@ -22,13 +22,15 @@
         <div class="centered col-3">
             <h2>Sidekick</h2>
             <!-- Use *ngIf and the correct placeholder to display a sidekick's image -->
-            <img src="{{placeholder}}" alt="OOPS! No image available."/>
+            <div *ngIf = "selected">
+                <img src="{{selected.image}}" alt="Oops! Missing photo!"/>
+             </div>
         </div>
 
         <div class="crew col-3">
             <h2>Selected Crew</h2>
             <ul>
-                <li>Use *ngFor to list the selected crew.</li>
+                <li *ngFor = "let member of crew">{{member.name}}</li>
             </ul>
             <!-- Add a "Clear Crew List" button here. -->
         </div>
@@ -37,6 +39,7 @@
     <div class = 'centered'>
         <button (click)="selected = false">Clear Data & Image</button>
         <!-- Add a "Send on Mission" button here. -->
+        <button (click)=addToCrew(selected)> Send on Mission</button>
     </div>
 </div>
 
