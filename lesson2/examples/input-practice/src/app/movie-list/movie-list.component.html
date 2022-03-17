@@ -4,5 +4,8 @@
        <li *ngFor ="let movie of movies">{{movie}}</li>
     </ol>
     <hr>
-
+    <!keyup stores data every time a key is released, keyup.enter waits until enter key is released, clear input box 29.6.3.1> 
+    <input #newMovie (keyup.enter)="addMovie(newMovie.value); newMovie.value=''" type="text" placeholder="Enter Movie Title Here"/>
+    <button (click)="addMovie(newMovie.value); newMovie.value=''">Add</button>
+   
  </div>
