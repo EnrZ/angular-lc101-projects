@@ -16,6 +16,9 @@ export class AppComponent {
   newLocation = 0;
   moveByThisAmountOfPixels = 10;
 
+  takeOffEnabled: boolean = true;
+
+
   takeOff(){
     let result = confirm("Confirm that the shuttle is ready for takeoff.");
    
@@ -24,6 +27,8 @@ export class AppComponent {
 		  this.color = "blue";
 		  this.height += 10000;
 		}
+    //after taking off, enabled is then made false
+    this.takeOffEnabled = false;
   }
 
   landShip(){
@@ -31,19 +36,24 @@ export class AppComponent {
     this.message = "The shuttle has landed.";
     this.color = "green";
     this.height = 0;
+    this.takeOffEnabled = true;
   }
 
-  abortMission(){
+  abortMission(rocketImage){
     let result = confirm("Confirm that you want to abort the mission.");
   
     if(result === true){
 	    this.message = "Mission aborted.";
 	    this.color = "red";
 	    this.height = 0;
+      this.takeOffEnabled = true;
+      this.resetRocketPos(rocketImage)
     }
   }
 
-  moveUp(rocketImage){
+  moveRocket(rocketImage, directions){
+  let buttonClicked = directions;
+  if(buttonClicked === "up"){
     //this is the image pixel count where the rocket is touching the edge of the top of square
     if(this.newBottomLocation < 330){
       this.newBottomLocation = this.newBottomLocation += this.moveByThisAmountOfPixels;
@@ -51,9 +61,9 @@ export class AppComponent {
       this.height += 10000;
     }
   }
+  
 
-
-  moveDown(rocketImage){
+  if(buttonClicked === "down"){
     if(this.newBottomLocation > 0){
       this.newBottomLocation = this.newBottomLocation -= this.moveByThisAmountOfPixels;
       rocketImage.style.bottom = this.newBottomLocation + "px";
@@ -61,7 +71,7 @@ export class AppComponent {
     }
   }
 
-  moveLeft(rocketImage){
+  if(buttonClicked === "left"){
     //-20 pixel location is edge of left
     if(this.newLocation > -20){
       this.newLocation = this.newLocation -= this.moveByThisAmountOfPixels;
@@ -69,15 +79,19 @@ export class AppComponent {
     }
   }
 
-  moveRight(rocketImage){
+  if(buttonClicked === "right"){
     if(this.newLocation < 260){
-    this.newLocation = this.newLocation += this.moveByThisAmountOfPixels;
-    rocketImage.style.left = this.newLocation + "px";
+      this.newLocation = this.newLocation += this.moveByThisAmountOfPixels;
+      rocketImage.style.left = this.newLocation + "px";
     }
   }
+
+}
   resetRocketPos(rocketImage){
     rocketImage.style.bottom = "0px";
     rocketImage.style.left = "0px";
+    this.newBottomLocation = 0;
+    this.newLocation = 0;
   }
 }
 
