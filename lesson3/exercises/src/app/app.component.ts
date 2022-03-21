@@ -13,6 +13,8 @@ export class AppComponent {
   width = 0;
   message = 'Space shuttle ready for takeoff!';
   newBottomLocation = 0;
+  newLocation = 0;
+  moveByThisAmountOfPixels = 10;
 
   takeOff(){
     let result = confirm("Confirm that the shuttle is ready for takeoff.");
@@ -36,30 +38,46 @@ export class AppComponent {
   
     if(result === true){
 	    this.message = "Mission aborted.";
-	    this.color = "green";
+	    this.color = "red";
 	    this.height = 0;
     }
   }
 
-  moveUp(rocketImg){
-    const moveByThisAmountOfPixels = 10;
-    this.newBottomLocation = this.newBottomLocation += moveByThisAmountOfPixels;
-    rocketImg.style.bottom = this.newBottomLocation + "px";
-    this.height += 10000;
+  moveUp(rocketImage){
+    //this is the image pixel count where the rocket is touching the edge of the top of square
+    if(this.newBottomLocation < 330){
+      this.newBottomLocation = this.newBottomLocation += this.moveByThisAmountOfPixels;
+      rocketImage.style.bottom = this.newBottomLocation + "px";
+      this.height += 10000;
+    }
   }
 
 
-  moveDown(rocketImg){
-    const moveByThisAmountOfPixels = 10;
-    this.newBottomLocation = this.newBottomLocation -= moveByThisAmountOfPixels;
-    rocketImg.style.bottom = this.newBottomLocation + "px";
-    this.height -= 10000;
+  moveDown(rocketImage){
+    if(this.newBottomLocation > 0){
+      this.newBottomLocation = this.newBottomLocation -= this.moveByThisAmountOfPixels;
+      rocketImage.style.bottom = this.newBottomLocation + "px";
+      this.height -= 10000;
+    }
   }
 
+  moveLeft(rocketImage){
+    //-20 pixel location is edge of left
+    if(this.newLocation > -20){
+      this.newLocation = this.newLocation -= this.moveByThisAmountOfPixels;
+      rocketImage.style.left = this.newLocation + "px";
+    }
+  }
 
-  resetRocketPos(rocketImg){
-    rocketImg.style.bottom = "0px";
-    rocketImg.style.left = "0px";
+  moveRight(rocketImage){
+    if(this.newLocation < 260){
+    this.newLocation = this.newLocation += this.moveByThisAmountOfPixels;
+    rocketImage.style.left = this.newLocation + "px";
+    }
+  }
+  resetRocketPos(rocketImage){
+    rocketImage.style.bottom = "0px";
+    rocketImage.style.left = "0px";
   }
 }
 
